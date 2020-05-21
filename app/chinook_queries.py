@@ -2,7 +2,7 @@ import os
 import sqlite3
 
 # construct a path to wherever your database exists
-#DB_FILEPATH = "chinook.db"
+
 #DB_FILEPATH = os.path.join(os.path.dirname(__file__), "..", "data", "chinook.db")
 #DB_FILEPATH = "/Users/computer/projects/lambda/DS-Unit-3-Sprint-2-SQL-and-Databases/module1-introduction-to-sql/rpg_db.sqlite3"
 DB_FILEPATH = os.path.join(os.path.dirname(__file__), "..", "data", "rpg_db.sqlite3")
@@ -35,11 +35,9 @@ INNER JOIN charactercreator_character ON charactercreator_character_inventory.ch
 #How many of the Items are weapons? How many are not?
 query3 = """
 SELECT
-	charactercreator_character.character_id,
-	count(charactercreator_character.character_id)
+	count(distinct item_ptr_id)
 FROM
-	charactercreator_character_inventory
-INNER JOIN charactercreator_character ON charactercreator_character_inventory.character_id = charactercreator_character.character_id
+	armory_weapon
 """
 
 #result = cursor.execute(query)
@@ -47,5 +45,8 @@ INNER JOIN charactercreator_character ON charactercreator_character_inventory.ch
 
 result2 = cursor.execute(query).fetchall()
 result3 = cursor.execute(query2).fetchall()
+result4 = cursor.execute(query3).fetchall()
+
 print("RESULT 2", dict(result2))
 print("RESULT 3", dict(result3))
+print("RESULT 4", result4[0][0])
