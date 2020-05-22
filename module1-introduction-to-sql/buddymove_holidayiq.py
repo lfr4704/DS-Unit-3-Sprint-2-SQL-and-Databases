@@ -6,3 +6,6 @@ engine = create_engine('sqlite://', echo=False)
 csv_path = os.path.join(os.path.dirname(__file__), "..", "module1-introduction-to-sql", "buddymove_holidayiq.csv")
 df = pd.read_csv(csv_path)
 print(df)
+
+df.to_sql('users', con=engine)
+engine.execute("SELECT * FROM users").fetchall()
