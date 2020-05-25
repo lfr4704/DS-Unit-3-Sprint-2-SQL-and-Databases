@@ -32,12 +32,30 @@ FROM
 	charactercreator_character_inventory
 INNER JOIN charactercreator_character ON charactercreator_character_inventory.character_id = charactercreator_character.character_id
 """
-#How many of the Items are weapons? How many are not?
+#How many weapons does each chatarter have, print first 20
+
 query3 = """
 SELECT
 	count(distinct item_ptr_id)
 FROM
 	armory_weapon
+"""
+
+# -- How many Weapons does each character have?
+# -- (Return first 20 rows)
+# -- row per character (302, including ones that have zero)
+# -- three cols: char id, char name, weapon_count
+query4 = """
+SELECT
+  c.character_id
+  ,c.name as character_name
+  -- ,inv.item_id
+  -- ,w.item_ptr_id as weapon_id
+  ,count(distinct w.item_ptr_id) as weapon_count
+FROM charactercreator_character c
+LEFT JOIN charactercreator_character_inventory inv ON c.character_id = inv.character_id
+LEFT JOIN armory_weapon w ON w.item_ptr_id = inv.item_id
+GROUP BY 1
 """
 
 #result = cursor.execute(query)
@@ -46,7 +64,9 @@ FROM
 result2 = cursor.execute(query).fetchall()
 result3 = cursor.execute(query2).fetchall()
 result4 = cursor.execute(query3).fetchall()
+result5 = cursor.execute(query4).fetchall()
 
 print("RESULT 2", dict(result2))
 print("RESULT 3", dict(result3))
 print("RESULT 4", result4[0][0])
+print("RESULT 5", dict(result5))
