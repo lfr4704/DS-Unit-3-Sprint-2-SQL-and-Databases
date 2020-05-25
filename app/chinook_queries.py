@@ -9,7 +9,7 @@ DB_FILEPATH = os.path.join(os.path.dirname(__file__), "..", "data", "rpg_db.sqli
 connection = sqlite3.connect(DB_FILEPATH)
 
 print("CONNECTION:", connection)
-connection.row_factory = sqlite3.Row
+#connection.row_factory = sqlite3.Row
 cursor = connection.cursor()
 print("CURSOR", cursor)
 
@@ -34,11 +34,14 @@ INNER JOIN charactercreator_character ON charactercreator_character_inventory.ch
 """
 #How many weapons does each chatarter have, print first 20
 
-query3 = """
-SELECT
-	count(distinct item_ptr_id)
-FROM
-	armory_weapon
+query3 ="""
+    SELECT cci.character_id, COUNT(*)
+    FROM charactercreator_character_inventory cci
+    WHERE cci.item_id IN (
+            SELECT aw.item_ptr_id
+            FROM armory_weapon aw
+    ) GROUP BY cci.character_id
+    LIMIT 20;
 """
 
 # -- How many Weapons does each character have?
@@ -66,7 +69,12 @@ result3 = cursor.execute(query2).fetchall()
 result4 = cursor.execute(query3).fetchall()
 result5 = cursor.execute(query4).fetchall()
 
-print("RESULT 2", dict(result2))
-print("RESULT 3", dict(result3))
-print("RESULT 4", result4[0][0])
-print("RESULT 5", dict(result5))
+# print("RESULT 2", dict(result2))
+# print("RESULT 3", dict(result3))
+# print("RESULT 4", result4[0][0])
+# print("RESULT 5", result5[0][1])
+
+print("RESULT 2", result2)
+print("RESULT 3", result3)
+print("RESULT 4", result4)
+print("RESULT 5", result5)
