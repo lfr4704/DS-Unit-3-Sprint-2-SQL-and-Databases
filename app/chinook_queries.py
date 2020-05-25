@@ -59,6 +59,7 @@ FROM charactercreator_character c
 LEFT JOIN charactercreator_character_inventory inv ON c.character_id = inv.character_id
 LEFT JOIN armory_weapon w ON w.item_ptr_id = inv.item_id
 GROUP BY 1
+LIMIT 20
 """
 
 #result = cursor.execute(query)
