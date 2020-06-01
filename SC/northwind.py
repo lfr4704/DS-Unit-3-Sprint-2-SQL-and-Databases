@@ -56,9 +56,11 @@ LIMIT 10
 
 # - What is the largest category (by number of unique products in it)?
 query5 = """
-SELECT AVG(hiredate - birthDate), City
-from Employee
-group by City
+SELECT count(CategoryId),
+CategoryName
+FROM Product
+LEFT JOIN Category on  Category.Id = Product.CategoryId
+group by CategoryId
 """
 
 
