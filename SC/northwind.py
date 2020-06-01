@@ -33,9 +33,11 @@ from Employee
 
 
 # - (*Stretch*) How does the average age of employee at hire vary by city?
-# query3 = """
-#
-# """
+query3 = """
+SELECT AVG(hiredate - birthDate), City
+from Employee
+group by City
+"""
 
 result = cursor.execute(query).fetchall()
 result2 = cursor.execute(query2).fetchall()
@@ -43,7 +45,7 @@ result2 = cursor.execute(query2).fetchall()
 
 print("RESULT 1:", result)
 print("RESULT 2:", result2)
-# print("RESULT 3:", result3)
+print("RESULT 3:", result3)
 
 
 cursor.close()
