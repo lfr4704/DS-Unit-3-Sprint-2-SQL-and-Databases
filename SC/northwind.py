@@ -69,17 +69,29 @@ Limit 1
 # - (*Stretch*) Who's the employee with the most territories? Use `TerritoryId`
 #   (not name, region, or other fields) as the unique identifier for territories.
 
+query6 = """
+SELECT FirstName, LastName, count(TerritoryId)
+FROM EmployeeTerritory
+JOIN Employee on Employee.Id = EmployeeTerritory.EmployeeId
+GROUP BY FirstName
+order by COUNT(TerritoryId) DESC
+LIMIT 1
+"""
+
 result = cursor.execute(query).fetchall()
 result2 = cursor.execute(query2).fetchall()
 result3 = cursor.execute(query3).fetchall()
 result4 = cursor.execute(query4).fetchall()
 result5 = cursor.execute(query5).fetchall()
+result6 = cursor.execute(query6).fetchall()
 
 print("RESULT 1:", result)
 print("RESULT 2:", result2)
 print("RESULT 3:", result3)
 print("RESULT 4:", result4)
 print("RESULT 5:", result5)
+print("RESULT 6:", result6)
+
 
 cursor.close()
 connection.close()
