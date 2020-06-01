@@ -70,11 +70,11 @@ Limit 1
 #   (not name, region, or other fields) as the unique identifier for territories.
 
 query6 = """
-SELECT FirstName, LastName, count(TerritoryId)
+SELECT FirstName, LastName, count(EmployeeId)
 FROM EmployeeTerritory
 JOIN Employee on Employee.Id = EmployeeTerritory.EmployeeId
-GROUP BY FirstName
-order by COUNT(TerritoryId) DESC
+GROUP BY EmployeeId
+ORDER BY COUNT(EmployeeId) DESC
 LIMIT 1
 """
 
