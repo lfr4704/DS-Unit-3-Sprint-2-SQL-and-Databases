@@ -56,11 +56,13 @@ LIMIT 10
 
 # - What is the largest category (by number of unique products in it)?
 query5 = """
-SELECT count(CategoryId),
+SELECT COUNT(CategoryId),
 CategoryName
 FROM Product
 LEFT JOIN Category on  Category.Id = Product.CategoryId
-group by CategoryId
+GROUP by CategoryName
+ORDER BY 1 DESC
+Limit 1
 """
 
 
