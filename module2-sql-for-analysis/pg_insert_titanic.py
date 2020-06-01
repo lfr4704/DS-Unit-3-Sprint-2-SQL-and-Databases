@@ -45,12 +45,26 @@ CREATE TABLE IF NOT EXISTS passengers (
 
 cursor.execute(table_creation_sql)
 
-# TODO: read CSV contents and insert rows into a new table
 
+#this creates a pandas df to a list of tuples
 list_of_tuples= list(df.to_records(index=False))
 
 insertion_query = f"INSERT INTO passengers (survived, pclass, name, sex, age, sib_spouse_count, parent_child_count, fare) VALUES %s"
 execute_values(cursor, insertion_query, list_of_tuples) #third param: data as a list
+
+#Queries for assignment 4
+
+# How many passengers survived, and how many died?
+# How many passengers were in each class?
+# How many passengers survived/died within each class?
+# What was the average age of survivors vs nonsurvivors?
+# What was the average age of each passenger class?
+# What was the average fare by passenger class? By survival?
+# How many siblings/spouses aboard on average, by passenger class? By survival?
+# How many parents/children aboard on average, by passenger class? By survival?
+# Do any passengers have the same name?
+# (Bonus! Hard, may require pulling and processing with Python) How many married couples were aboard the Titanic? Assume that two people (one Mr. and one Mrs.) with the same last name and with at least 1 sibling/spouse aboard are a married couple.
+
 
 
 # ACTUALLY SAVE THE TRANSACTIONS

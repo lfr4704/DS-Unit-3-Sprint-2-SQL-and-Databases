@@ -89,71 +89,20 @@ docs = [
 ]
 client.rpg.charactercreator_character.insert_many(docs)
 
+# Queries
+# How many total Characters are there?
 print("number of characters:")
 print(client.rpg.charactercreator_character.count_documents({}))
+# How many total Items?
+print("number of total items:")
 
-# row_count = 'SELECT COUNT(*) FROM charactercreator_character'
-# sl_curs.execute(row_count).fetchall()
-#
-# get_characters = 'SELECT * FROM charactercreator_character'
-# characters = sl_curs.execute(get_characters).fetchall()
-#
-# sl_curs.execute('PRAGMA table_info(charactercreator_character);').fetchall()
-#
-# # run the script multiple times without it giving an error
-# drop_table = '''DROP TABLE charactercreator_character;'''
-# sl_curs.execute(drop_table)
-#
-# create_character_table = """
-# CREATE TABLE charactercreator_character (
-#   character_id SERIAL PRIMARY KEY,
-#   name VARCHAR(30),
-#   level INT,
-#   exp INT,
-#   hp INT,
-#   strength INT,
-#   intelligence INT,
-#   dexterity INT,
-#   wisdom INT
-# );
-# """
-#
-# sl_curs.execute(create_character_table)
-# sl_conn.commit()
-#
-# # Fill table with characters
-# for character in characters:
-#     insert_character = """
-#     INSERT INTO charactercreator_character
-#     (name, level, exp, hp, strength, intelligence, dexterity, wisdom)
-#     VALUES """ + str(character[1:]) + ";"
-#     sl_curs.execute(insert_character)
-#     sl_conn.commit()
-#
-# # Make character_table a document
-#
-# character_query = "SELECT * FROM charactercreator_character;"
-# charactercreator_character = sl_curs.execute(character_query).fetchone()
-# # Different variable name here to avoid confusion
-# all_characters = sl_curs.execute(character_query).fetchall()
-#
-# first_character = all_characters[0]
-#
-#
-# rpg_doc = {
-#     'sql_key': all_characters[0],
-#     'name': all_characters[1],
-#     'level': all_characters[2],
-#     'exp': all_characters[3],
-#     'hp': all_characters[4],
-#     'strenth': all_characters[5],
-#     'intelligence': all_characters[6],
-#     'dexterity': all_characters[7],
-#     'wisdom': all_characters[8]
-# }
-#
-# collection.insert_one(rpg_doc)
-#
-# list(collection.find(rpg_doc))
-#
-# print(all_characters)
+
+#queries for assignment 4
+
+# How many of each specific subclass?
+
+# How many of the Items are weapons? How many are not?
+# How many Items does each character have? (Return first 20 rows)
+# How many Weapons does each character have? (Return first 20 rows)
+# On average, how many Items does each Character have?
+# On average, how many Weapons does each character have?
