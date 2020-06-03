@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS demo_data;
 """
 
 table_creation_sql = """
+
 CREATE TABLE IF NOT EXISTS demo_data (
     id SERIAL PRIMARY KEY,
     "s" text,
@@ -30,47 +31,17 @@ CREATE TABLE IF NOT EXISTS demo_data (
     "y" int4);
 """
 
-insertion_query1 = """
-
-INSERT INTO demo_data (
-    s,
-    x,
-    y)
-VALUES (
-    'g',
-    3,
-    9);
-"""
-
-insertion_query2 = """
-
-INSERT INTO demo_data (
-    s,
-    x,
-    y)
-VALUES (
-    'v',
-    5,
-    7);
-"""
-
-insertion_query3 = """
-
-INSERT INTO demo_data (
-    s,
-    x,
-    y)
-VALUES (
-    'f',
-    8,
-    7);
-"""
+insertion_query = '''
+INSERT INTO demo_data (s, x, y)
+VALUES
+    ('g', 3, 9),
+    ('v', 5, 7),
+    ('f', 8, 7);
+'''
 
 cursor.execute(drop_existing_sql_table)
 cursor.execute(table_creation_sql)
-cursor.execute(insertion_query1)
-cursor.execute(insertion_query2)
-cursor.execute(insertion_query3)
+cursor.execute(insertion_query)
 
 
 #- Count how many rows you have - it should be 3!
